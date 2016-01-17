@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Vectors Review}
+
+\subsection{Cosine Rule:}
+
+$$
+c^2 = a^2 + b^a - 2ab\cos\theta
+$$
+
+\subsection{Angle between vectors:}
+
+$$
+\vec{u} \cdot \vec{v} = \mid \vec{u} \mid * \mid \vec{v} \mid * \cos\theta
+$$
+
+\subsection{Project $\vec{u}$ onto $\vec{v}$:}
+
+$$
+\frac{\vec{u} \cdot \vec{v}}{{\mid \vec{v} \mid}^2 }\vec{v}
+$$
+
+\subsection{Cross Product in 3 Dimensions:}
+
+$$
+\vec{u} \cdot \vec{v} = \text{determinant of }
+\begin{bmatrix}
+\vec{i} & \vec{j} & \vec{k} \\
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3
+\end{bmatrix}
+$$
+
+\end{document}

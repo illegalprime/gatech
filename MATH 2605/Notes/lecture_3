@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\title{Lecture 3}
+
+\begin{document}
+
+\maketitle
+
+\section*{12.4 Cont.}
+
+\paragraph{Recall}
+\begin{itemize}
+    \item if $\vec{u} \cdot \vec{v} = 0$ then $\vec{u}$ and $\vec{v}$ are perpendicular to each other.
+    \item if $\vec{u} \times \vec{v} = \vec{0}$ then $\vec{u}$ and $\vec{v}$ are parallel.
+\end{itemize}
+
+
+\paragraph{More Vector Properties}
+\begin{itemize}
+    \item $\vec{u} \times \vec{v} = -(\vec{v} \times \vec{u})$
+    \item $\mid \vec{u} \times \vec{v} \mid$ is the area of the parallelogram whose sides are these two vectors.
+    \item $\vec{u} \times \vec{v} = \vec{n} \mid \vec{u} \mid \mid \vec{v} \mid \sin \theta$ where $\vec{n}$ is the normal of the two vectors.
+    \item $\vec{u} \times (\vec{v} \times \vec{w}) = (\vec{u} \cdot \vec{w}) \vec{v} - (\vec{u} \cdot \vec{v}) \vec{w}$
+\end{itemize}
+
+\subsection*{Triple Scalar Product}
+
+The triple scalar product of $\vec{u}$, $\vec{v}$, and $\vec{w}$:
+$$
+(\vec{u} \times \vec{v}) \cdot \vec{w}
+$$
+
+It is equivalent to the determinant of the matrix:
+
+$$
+\begin{vmatrix}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{vmatrix}
+$$
+
+These vectors form a corner of a parallelepiped in space. The absolute value of the triple scalar is the volume of this shape:
+$$
+\mid (\vec{u} \times \vec{v}) \cdot \vec{w} \mid = \text{volume of parallelepiped}
+$$
+
+\section*{12.5 Lines \& Planes in space}
+
+\subsection*{Equation of a Line}
+
+Suppose we have a line $L$ that has a point which passes through a point $\vec{P_0}$ and this line is parallel to $\vec{v} = \langle v_1, v_2, v_3 \rangle$. Then the equation for a line is as follows:
+
+$$
+L(t) = t * (\vec{v} - \vec{P_0})
+$$
+
+\subsection*{Equation of a Plane}
+
+Let $\vec{P}$ be any point on the plane and $\vec{P_0}$ be a point on the plane, also let $\vec{n}$ be a vector perpendicular to the plane. From the dot product we get:
+
+$$
+(\vec{P} - \vec{P_0}) \cdot \vec{n} = 0
+$$
+
+If $\vec{n} = \langle A, B, C \rangle$ then the equation becomes:
+
+$$
+A(x - x_0) + B(y - y_0) + C(z - z_0) = 0
+$$
+
+Moving the constants to one side and assigning them to $D$ creates the standard equation of a plane:
+
+$$
+Ax + By + Cz = Ax_0 + By_0 + Cz_0 = D
+$$
+
+\paragraph{Example}
+
+The points $P(1, 1, 1)$, $Q(2, 1, 3)$, and $R(3, -1, 1)$ on the plane $E$. Find the equation of the plane $E$.
+
+We need to find the normal vector, just cross two vectors parallel to the plane:
+
+$$
+\vec{PQ} = \langle 1, 0, 2 \rangle
+$$
+$$
+\vec{PR} = \langle 2, -2, 0 \rangle
+$$
+
+
+$$
+\vec{PQ} \times \vec{PR} = \begin{vmatrix}
+\vec{i} & \vec{j} & \vec{k} \\
+1 & 0 & 2 \\
+2 & -2 & 0
+\end{vmatrix} = \langle 4, 4, -2 \rangle = \langle 2, 2, -1 \rangle = \vec{n}
+$$
+
+Then we pick a point on the vector to act as $\vec{P_0}$, lets do $P$
+
+The equation is then:
+$$
+4(x - 1) + 4(y - 1) - 2(z - 1) = 0
+$$
+
+Or:
+
+$$
+2(x - 1) + 2(y - 1) - (z - 1) = 0
+$$
+
+Or (most commonly):
+
+$$
+2x + 2y - z = 3
+$$
+
+\subsection*{Distance from point to line}
+
+To find the distance form a point $S$ to a line $L$, then this distance is
+
+$$
+d = \frac{\mid \vec{PS} \times \vec{v} \mid}{\mid \vec{v} \mid}
+$$
+
+Where $\vec{v}$ is a vecotr parallel to the line and $P$ is a point on the line.
+
+\subsection*{Distance from point to plane}
+To find the distance between a point $S$ to ao plane $E$:
+
+$$
+d = \frac{\vec{PS} \cdot \vec{n}}{\mid \vec{n} \mid}
+$$
+
+where $P$ is a point on the plane and $\vec{n}$ is the normal vector for that plane.
+
+
+\end{document}
