@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{CS 3600 -- Lecture 3}
+\begin{document}
+
+\maketitle
+
+\section*{Environment Types}
+
+\begin{itemize}
+    \item Fully or Partially Observable
+    \item Deterministic of Stochastic
+    \item Episodic or Sequential
+    \item Static or Dynamic
+    \item Discrete or Continuous
+    \item Single-Agent or Multi-Agent
+\end{itemize}
+
+\section*{Agent Program Design}
+We want to map the state to an action, should we just build a big table? Probably not, that's huge.
+
+\paragraph{Types of Agents}
+\begin{itemize}
+    \item Reflex
+    \item Model-Based Agent
+    \item Goal-Based Agent
+    \item Utility-Based Agent
+\end{itemize}
+
+\subsection*{Reflex Agent}
+This agent asks what is the world like now? Then what action should I take (based on some table/rules/algo).
+
+\subsection*{Model-Based Agent}
+A model of the environment is being kept in memory.
+
+\subsection*{Goal-Based Agent}
+Action not only dependent on state history, here you add planning and prediction of state.
+
+\subsection*{Utility-Based Agent}
+Not only need to get to a goal but this agent also tries to maximize a utility function.
+
+\end{document}

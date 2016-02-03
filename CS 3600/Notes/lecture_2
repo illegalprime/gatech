@@ -1,0 +1,29 @@
+# Administrative
+
+## Text:
+"AI: A Modern Approach" - 3rd Edition by Stuart Russell
+
+## Grading
+Midterm:  30%
+Final:    30%
+Projects: 30%
+     - 4 Graded Projects
+     - 1 Ungraded Project (Python Tutorial)
+     - all projects done in python
+
+** No late submissions **
+** partial credit available **
+** submissions through T-Square, autograded **
+
+# Agents as Functions
+
+Agents can be viewed as a function taking inputs from sensors
+and producing outputs to actuators.
+
+Agent <-> Environment (through sensor input and actuator output)
+
+Agents do a thing and try to maximize their performance in doing that
+thing. Some factors:
+    - time to completeion
+    - is it done correctly (sensors to check)
+    - resources used
