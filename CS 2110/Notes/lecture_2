@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\title{CS 2110 Lecture 2}
+
+\begin{document}
+
+\maketitle
+
+\section*{Two's Complement}
+
+\begin{tabular}{c c c c c}
+Binary & Unsigned & Signed Mag & 1's comp & 2's comp \\
+0000 & 0 & 0 & 0 & 0 \\
+0001 & 1 & 1 & 1 & 1 \\
+0010 & 2 & 2 & 2 & 2 \\
+0011 & 3 & 3 & 3 & 3 \\
+0100 & 4 & 4 & 4 & 4 \\
+0101 & 5 & 5 & 5 & 5 \\
+0110 & 6 & 6 & 6 & 6 \\
+0111 & 7 & 7 & 7 & 7 \\
+1000 & 8 & -0 & -7 & -8 \\
+1001 & 9 & -1 & -6 & -7 \\
+1010 & 10 & -2 & -5 & -6 \\
+1011 & 11 & -3 & -4 & -5 \\
+1100 & 12 & -4 & -3 & -4 \\
+1101 & 13 & -5 & -2 & -3 \\
+1110 & 14 & -6 & -1 & -2 \\
+1111 & 15 & -7 & -0 & -1 \\
+\end{tabular}
+
+\subsection*{Converting to Two's Complement}
+
+To represent $n$ as $-n$ in two's complement, subtract $n$ from the radix. The radix is the lowest number the binary word cannot represent.
+
+\paragraph*{Example}
+
+For a 4-bit system, the radix is 10000 (16). Compute $10000 - 11$ to get 11 (3) as a negative (1101 or -3).
+
+\subsection*{Easier Conversion to Two's}
+Simple flip all the bits and add one. For a number $n$:
+$$
+!n + 1 = -n
+$$
+
+\section*{Fractional Binary Numbers}
+
+\subsection*{Mathematical Representation}
+
+\begin{tabular}{c c c c c c c c c c c}
+1 & 0 & 1 & 0 & . & 1 & 0 & 1 \\
+$2^3$ & $2^2$ & $2^1$ & $2^0$ & . & $2^{-1}$ & $2^{-2}$ & $2^{-3}$
+\end{tabular}
+
+\subsection*{Floating Point Numbers}
+
+not yet discussed
+
+\section*{Overflow}
+
+\subsection*{Detecting Overflow}
+
+Add two binary numbers (even works in two's complement!), if the carry out bits of the operands and results aren't equal, then overflow has occurred!
+
+\paragraph*{Example} On a 4-bit computer with two's complement:
+$$
+\textbf{0}100 + \textbf{0}100 = \textbf{1}000
+$$
+Here we are computing $4 + 4$ which in an unsigned system would produce 8, but in two's complement would overflow and produce -8. We can see that the overflow happened because the sign bit of the two operands is different than result's.
+
+\section*{Sign Extension}
+
+\paragraph*{Problem} Suppose we want to add a value stored in a 4 bit register with a value stored in an 8-bit register in an 8-bit adder. How do we stretch a 4-bit signed number into an 8-bit signed number?
+
+\begin{itemize}
+    \item If the number is a positive number, then the extra 4 left hand bits should be zeros.
+    \item If the number is a negative number, then the extra 4 left hand bits should be ones (two keep it overflowing).
+\end{itemize}
+
+\end{document}
