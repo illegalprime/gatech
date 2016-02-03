@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{Lecture 4}
+\begin{document}
+
+\maketitle
+
+\paragraph{Last time} $n$-bit integer multiplication in $O(n^{1.53})$
+
+\paragraph{Today} $n \times n$ matrix multiplication that's faster than $O(n^3)$. And where do such speedups come from? One example is polynomial interpolation.
+
+\paragraph{Next Time} FFT and $n$-bit integer multiplication in $O(n\log{n})$.
+
+\section{Integer Multiplication Review}
+
+For $n$-bit integers $a$ and $b$:
+\begin{align*}
+    a &= x_1 2^{n/2} + x_2 \\
+    b &= y_1 2^{n/2} + y_2
+\end{align*}
+
+So multiplying them together makes:
+$$
+c = a \times b = x_1 y_1 2^n + (x_1 y_1 + x_2 y_2) 2^{n/2} + x_2 y_2
+$$
+
+\section{Matrix Multiplication}
+
+Suppose we have a matrix $A$ that is $n \times n$ and $B$ that is also $n \times n$ and we want the matrix $C = A \times B$.
+
+How to multiply matrices (naively) means every element $C_{ij}$ is
+$$
+C_{ij} = \sum_{k = 1}^n a_{ik} b_{kj}
+$$
+So for every element we have to do $n$ multiplications for $n^2$ entries. This means it is in $O(n^3)$.
+
+We can subdivide $A$ and $B$ into 4 $\frac{n}{2} \times \frac{n}{2}$ submatricies each, let's call them $A_{11}, A_{12}, A_{21}, $ etc.\ from left to right, up to down.
+
+We can kind of (aparently) multiply these smaller matrices together just as if they were elements of a larger matrix. The following is exactly like multiplying two $4 \times 4$ size matrices but we are multiplying the submatricies together.
+\begin{align*}
+    C_{11} &= A_{11} \times B_{11} + A_{12} \times B_{21} \\
+    C_{12} &= A_{11} \times B_{12} + A_{12} \times B_{22} \\
+    C_{21} &= A_{21} \times B_{11} + A_{22} \times B_{21} \\
+    C_{22} &= A_{21} \times B_{12} + A_{22} \times B_{22}
+\end{align*}
+
+So we need 8 multiplications of $n/2$ size square matrices and some additions of matrices which are $O(n^2)$:
+$$
+T(n) = 8T\left(\frac{n}{2}\right) + cn^2 \in O(n^{\log_2{8}}) = O(n^3)
+$$
+
+But what if we do 7 multiplications instead of 8? Then we will have:
+$$
+T(n) = 7 T \left( \frac{n}{2} \right) + cn^3 \in O(n^{\log_2{7}}) = O(n^{2.7})
+$$
+
+\subsection{7 instead of 8}
+The trick is not so simple, let's defined some additions in $O(n^2)$
+\begin{align*}
+    S_1 &= B_{12} - B_{22} \\
+    S_2 &= A_{11} + A_{12} \\
+    S_3 &= A_{21} + A{22} \\
+    S_4 &= B_{21} - B_{11} \\
+    S_5 &= A_{11} + A_{22} \\
+    S_6 &= B_{11} + B_{22} \\
+    S_7 &= A_{12} - A_{22} \\
+    S_8 &= B_{21} - B{22} \\
+    S_9 &= A_{11} - A_{21} \\
+    S_{10} &= B_{11} + B_{12}
+\end{align*}
+
+And some multiplications in $O(n^3)$
+\begin{align*}
+    P_1 &= A_{22} * S_1 \\
+    P_2 &= S_2 * B_{22} \\
+    P_3 &= S_3 * B_{11} \\
+    P_4 &= A_{22} * S_{4} \\
+    P_5 &= S_5 * S_6 \\
+    P_6 &= S_7 * S_8 \\
+    P_7 &= S_9 * S_{10}
+\end{align*}
+
+Two integers can be represented like so:
+\begin{align*}
+    a &= x_1 n^{2n/3} + x_2 2^{n/3} + x_3 \\
+    b &= y_1 n^{2n/3} + y_2 2^{n/3} + y_3 \\
+\end{align*}
+
+Multipliying them we get:
+\begin{align*}
+    c = a \times b&  \\
+                  &= x_1 y_1 2^{4n/3} &= S_1 \\
+                  &+ (x_1 y_2 + x_2 y_1) 2^{3n/2} &= S_2 \\
+                  &+ (x_1 y_3 + y_1 x_3 + x_2 y_2) 2^{2n/3} &= S_3 \\
+                  &+ (x_2 y_3 + x_3 y_2) 2^{n/3} &= S_4 \\
+                  &+ x_3 y_3 &= S_5
+\end{align*}
+
+This is a polynomial of degree 4: $P(x) = S_1 x^x + S_2 x^3 + S_3 x^2 + S_4 x + S_5 $ which means we can compute the value of all the coefficients in just 5 points.
+\begin{align*}
+    P(0) &= S_5 \\
+    P(1) &= S_1 + S_2 + S_3 + S_4 + S_5 \\
+    P(-1) &= S_1 - S_2 + S_3 - S_4 + S_5 \\
+    P(2) &= (4x_1 + 2x_2 + x_3) * (4y_1 + 2y_2 + y_3) \\
+    P(-2) &= (4x_1 - 2x_2 + x_3) * (4y_1 - 2y_2 + y_3) \\
+\end{align*}
+
+\section{Conclusion}
+
+Start readind about FFT and Toom-3.
+
+\end{document}
